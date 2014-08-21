@@ -1,13 +1,13 @@
-define([
+define('IdentifyTiles', [
     'dojo/_base/declare',
     'dojo/_base/lang',
-    'dojo/Color',
+    'dojo/_base/Color',
     'dojo/dom',
 
-    'esri/tasks/Query',
+    'esri/tasks/query',
     'esri/tasks/QueryTask',
-    'esri/symbol/SimpleFillSymbol',
-    'esri/symbol/SimpleLineSymbol'
+    'esri/symbols/SimpleFillSymbol',
+    'esri/symbols/SimpleLineSymbol'
 ], function (
     declare,
     lang,
@@ -19,7 +19,7 @@ define([
     SimpleFillSymbol,
     SimpleLineSymbol
     ) {
-    return declare('IdentifyTiles', null, {
+    return declare(null, {
         // summary:
         //      In charge of querying indices layers and returning download information
 

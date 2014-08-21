@@ -5,13 +5,17 @@ require([
     'dojo/on',
     'dojo/query',
 
+    'IdentifyTiles',
+
     'dojo/domReady!'
 ], function (
     Map,
     ArcGISImageServiceLayer,
 
     on,
-    query
+    query,
+
+    IdentifyTiles
     ) {
     // this will save us some typing later on
     var baseUrl = 'http://mapserv.utah.gov/ArcGIS/rest/services/';
@@ -34,6 +38,7 @@ require([
     console.log('hello');
 
     var currentLayer;
+    var identify;
 
     function init() {
         console.log('init fired');
@@ -60,6 +65,8 @@ require([
         map.addLayer(layers.doq1990);
 
         wireEvents();
+
+        identify = new IdentifyTiles(map);
     }
 
     function wireEvents() {
@@ -76,6 +83,8 @@ require([
         currentLayer = layers[evt.target.value];
 
         currentLayer.show();
+
+        identify.switchCurrentLayer(evt.target.value);
     }
 
     init();
