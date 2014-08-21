@@ -1,10 +1,17 @@
 require([
     'esri/map',
     'esri/layers/ArcGISImageServiceLayer',
+
+    'dojo/on',
+    'dojo/query',
+
     'dojo/domReady!'
 ], function (
     Map,
-    ArcGISImageServiceLayer
+    ArcGISImageServiceLayer,
+
+    on,
+    query
     ) {
     // this will save us some typing later on
     var baseUrl = 'http://mapserv.utah.gov/ArcGIS/rest/services/';
@@ -26,6 +33,8 @@ require([
 
     console.log('hello');
 
+    var currentLayer;
+
     function init() {
         console.log('init fired');
 
@@ -33,6 +42,7 @@ require([
 
         layers.hro2012 = new ArcGISImageServiceLayer(urls.hro2012);
         map.addLayer(layers.hro2012);
+        currentLayer = layers.hro2012;
 
         layers.hro2009 = new ArcGISImageServiceLayer(urls.hro2009, {
             visible: false
@@ -48,6 +58,24 @@ require([
             visible: false
         });
         map.addLayer(layers.doq1990);
+
+        wireEvents();
+    }
+
+    function wireEvents() {
+        console.log('wireEvents fired');
+
+        query("input[type='radio']").on('click', onRadioClicked);
+    }
+
+    function onRadioClicked(evt) {
+        console.log('onRadioClicked fired');
+
+        currentLayer.hide();
+
+        currentLayer = layers[evt.target.value];
+
+        currentLayer.show();
     }
 
     init();
