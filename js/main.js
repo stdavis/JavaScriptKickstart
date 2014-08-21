@@ -17,6 +17,13 @@ require([
         doq1990: baseUrl + 'AerialPhotography_BlackWhite/DOQ1990s_1Meter/ImageServer'
     };
 
+    var layers = {
+        hro2012: null,
+        hro2009: null,
+        uao2003: null,
+        doq1990: null
+    };
+
     console.log('hello');
 
     function init() {
@@ -24,12 +31,23 @@ require([
 
         var map = new Map('map');
 
-        var hro2012Lyr = new ArcGISImageServiceLayer(urls.hro2012);
-        var hro2009Lyr = new ArcGISImageServiceLayer(urls.hro2009);
-        var uao2003Lyr = new ArcGISImageServiceLayer(urls.uao2003);
-        var doq1990Lyr = new ArcGISImageServiceLayer(urls.doq1990);
+        layers.hro2012 = new ArcGISImageServiceLayer(urls.hro2012);
+        map.addLayer(layers.hro2012);
 
-        map.addLayer(hro2012Lyr);
+        layers.hro2009 = new ArcGISImageServiceLayer(urls.hro2009, {
+            visible: false
+        });
+        map.addLayer(layers.hro2009);
+
+        layers.uao2003 = new ArcGISImageServiceLayer(urls.uao2003, {
+            visible: false
+        });
+        map.addLayer(layers.uao2003);
+
+        layers.doq1990 = new ArcGISImageServiceLayer(urls.doq1990, {
+            visible: false
+        });
+        map.addLayer(layers.doq1990);
     }
 
     init();
