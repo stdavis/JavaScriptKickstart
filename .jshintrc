@@ -1,5 +1,8 @@
 {
+    "undef": true, // find undefined global references
     "predef": [
-        "console"
+        "console",
+        "define",
+        "require"
     ]
 }
